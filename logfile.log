@@ -1,0 +1,6 @@
+xx) INFO | Se carga dataux
+xx) WARNING | Se crea la funcion: from_sq_ft_to_m2
+xx) CRITICAL | Celda 11: No encuentro mucho valor en este dataset
+xx) INFO | Se carga dataux
+xx) ERROR | Descarga visualizacion: histo_1.png, requiere trabajo exploratorio y explicativo, por cuestiones de procesamiento se debe comentar la línea
+xx) INFO | Arranca toma de apuntes de las notebooks de clase

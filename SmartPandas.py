@@ -5,7 +5,7 @@ from joblib import Parallel, delayed
 from sklearn.pipeline import FeatureUnion, _fit_transform_one, _transform_one
 from scipy import sparse
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler, MaxAbsScaler
 
 """Funcion que devuelve informacion de un DataFrame en formato tipo DataFrame"""
 
@@ -35,7 +35,10 @@ def data_info(data, name='data'):
 	- FeatureDivision
 	- FeatureDiscretize
 	- CorrSpearman
-	- FeatureEncoder(nofunciona)"""
+	- FeatureEncoder(nofunciona)
+    - ColateColumn
+    - BuscarIndex
+    """
 #################################
 
 
@@ -200,6 +203,60 @@ class FeatureEncoder(BaseEstimator, TransformerMixin):
         else:
             print ('Error en el metodo de clase')
 
+class ColateColumn():
+    """
+    La columna "colate", debe entrar atras que la columna "label". Usamos un pd.reindex() 
+    """
+    
+    def __init__(self, dataset, colate=0):
+        self.dataset = dataset
+        self.colate = colate
+        
+    def vos(self, colate):
+        self.colate = colate
+        return self
+    
+    def aca(self, aca):
+        
+        dicto = {}
+        for i, elemento in enumerate(list(self.dataset.columns)):
+            dicto[elemento] = i
+
+        if dicto[aca] < dicto[self.colate]:
+            n_colate = dicto[self.colate]
+            n_aca = dicto[aca] + 1
+
+            for i, elemento in enumerate(dicto.keys()):
+                if dicto[elemento] >= n_aca and dicto[elemento] < n_colate:
+                    dicto[elemento] += 1
+
+            dicto[self.colate] = n_aca
+            llaves = pd.Series(dicto).sort_values().index
+            return self.dataset.reindex(llaves, axis=1)
+
+class BuscarIndex():
+        
+    def __init__(self, dataset):
+        self.dataset = dataset
+        
+        
+    def cliente(self, cliente_id):
+        dataset = self.dataset
+        X_T = dataset.loc[dataset.index == cliente_id].T
+        X_T.columns = X_T.iloc[0]
+        X_T.drop(index = list(X_T.index)[0], inplace=True)
+        X_T.index.name = f'| cliente: {cliente_id}'
+        X_T.columns.name = 'Ventas Mensuales [$] | category:'
+        return X_T
+    
+    def category(self, category):
+        dataset = self.dataset
+        X_T = dataset.loc[dataset.index == category]#.T
+        #X_T.columns = X_T.iloc[0]
+        X_T.set_index(list(dataset.columns)[0], drop=True, inplace=True)
+        X_T.columns.name = 'Cantidad Vendida [Un.] | date:'
+        return X_T.dropna()
+            
 #######################################################################################################
 
 

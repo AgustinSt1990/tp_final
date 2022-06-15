@@ -37,7 +37,7 @@ _Aclaración: El enfoque que se le pretende dar al trabajo consiste en transform
 
 La atención la se centra en el dataset "Customer Transaction Data" : "transaction_data".
 
-##### <u>Estudio de columnas</u>: transaction_data
+#### <u>Estudio de columnas</u>: transaction_data
 
 - 0	date: Fecha en que ocurrió la transacción
 - 1	customer_id: conexión con dataset "customer_data"
@@ -50,7 +50,7 @@ La atención la se centra en el dataset "Customer Transaction Data" : "transacti
 
 Hay 2 datasets que consideramos pertinentes para ampliar el rango de aprendizaje de los datos. {'customer_demographics_data': 'customer_data', 'item_data': 'item_data'}
 
-##### <u>Estudio de columnas</u>: customer_data
+#### <u>Estudio de columnas</u>: customer_data
 - 0	rented: 0 establecimiento no alquilado - 1 establecimiento alquilado
 - 1	income_bracket: Categórica ordinal - los labels mayores corresponden a ingresos mayores
 - 2	customer_id: conexión con "transaction_data"
@@ -59,7 +59,7 @@ Hay 2 datasets que consideramos pertinentes para ampliar el rango de aprendizaje
 - 5	family_size: cantidad de familiares
 - 6	age_range: Categórica, los labels informar el rango etario de la familia
 
-##### <u>Estudio de columnas</u>: item_data
+#### <u>Estudio de columnas</u>: item_data
 
 Podemos ver que encontramos dos variables categóricas, una es binaria y la otra multiclase, una corresponde a "brand_type" y la otra a "category"
 
@@ -106,7 +106,7 @@ También tenemos presente el hecho didáctico del trabajo y queremos que la pres
 
 Los dataset están todos en el link publicado en la introducción de este texto.
 
-Las librerias son todas aquellas con las que venimos trabajando, Pandas, Numpy, Scipy, Pickle, Scikit Learn, statsmodels, xgboost, matplotlib, seaborn, ...
+Las librerias son todas aquellas con las que venimos trabajando, Pandas, Numpy, Scipy, Pickle, Scikit Learn, statsmodels, xgboost, matplotlib, seaborn.
 
 Otras librerías que consideramos usar es Arrow, scikit-image, pyspark, mlflow, PyGraphviz, LightGBM, Bokeh, logging, os, etc.
 

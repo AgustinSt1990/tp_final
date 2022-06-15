@@ -4,9 +4,9 @@
 
 **Grupo 1**
 - Integrantes del grupo:
-    - Gonzalo Barbot
-    - Fernando Dupont
-    - Agustin Stigliano
+    - Gonzalo Barbot - Project Manager
+    - Agustin Stigliano - Code Development Manager
+    - Fernando Dupont - Presentation Development Manager
     
 Acceso al repositorio: https://github.com/AgustinSt1990/tp_final    
 
@@ -29,8 +29,7 @@ A continuación se muestra un gráfico en el que se conectan los dataset recién
 
 _Aclaración: El enfoque que se le pretende dar al trabajo consiste en transformar los datos comerciales de una empresa a través de algoritmos de machine learning, robustos, en información valiosa para los ejecutivos de la empresa. Que incluso tenga el potencial de convertirse en una herramienta que permita desarrollar, en parte, las presentaciones pertinentes para la toma de decisiones, desde el ejecutivo al órgano directivo de la empresa._
 
-
-![Schema_datasets.png](attachment:0a2edb4c-5431-447f-aa2a-279e6e52c3d1.png)
+<img width="848" alt="Schema_datasets" src="https://user-images.githubusercontent.com/95892143/173867516-52a16585-9097-47fa-882e-f1c20626c49f.png">
 
 ### <font color = #f44611><u>Presentación de la propuesta</u></font>
 
@@ -73,11 +72,11 @@ Luego se genera el dataset "data" con el que pretendemos utilizar de punto de pa
 
 Entonces pasamos de tener esto:
 
-![data_raw.png](attachment:5a5ce470-6690-4cb8-971d-67a23d912237.png)
+![data_raw](https://user-images.githubusercontent.com/95892143/173867627-b960f41e-6677-42b1-b15e-60048c55602a.png)
 
 a tener esto:
 
-![data_merged.png](attachment:e0bb97f3-bf96-4139-b7d3-9ee6b2418201.png)
+![data_merged](https://user-images.githubusercontent.com/95892143/173867667-c34673e8-6dee-4a91-b4e8-d4daba06895c.png)
 
 
 #### Formalización del proyecto

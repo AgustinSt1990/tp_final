@@ -135,7 +135,10 @@ if __name__ == '__main__':
     
     
     df = load_dataset('target_meat.csv')
-    error, df_test, df_pred = walk_forward_validation(df, n_test=60)
+    print (df)
+    print (df.index)
+    error, df_test, df_pred = walk_forward_validation(df, n_test=45)
+    #print ('RMSE: ', mean_squared_error(df_test, np.exp(df_pred)))
     print ('RMSE: ', error)
     guardar_funcion()
     print ('Finalizacion de la app - Gracias por haberla utilizado')

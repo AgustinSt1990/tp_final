@@ -2,6 +2,7 @@ AirPassengers.csv
 Supertienda.xls
 target_meat.csv
 *.log
+*.pickle
 data/*
 test/*
 

@@ -1,4 +1,4 @@
-print ('Libreria SmartSeries')
+print ('Libreria SmartSeries: Clases: VectorBuilder() - Funciones: load_dataset')
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf

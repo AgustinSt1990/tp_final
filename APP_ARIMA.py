@@ -1,4 +1,5 @@
 # APP ARIMA
+print ('APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
 from os import times
 import numpy as np
 import pandas as pd
@@ -184,17 +185,12 @@ if __name__ == '__main__':
     diferenciacion = test_stationarity(df)
     print (type(df))# type: dataframe de 1 columna
 
-    print ()
-        
-    check = df[df.columns.values[0]]
-    print (np.log(check)[1])
-
-
+   
 
     #residuos = valor_real - predicciones_modelo_reg_log_est# no esta desarrollado
     # get_stationarity(residuos)
 
-    #params_set_plot(diferenciacion)
+    params_set_plot(diferenciacion)
 
     # verificacion manual de los parametros ARIMA(p,d,q)
 

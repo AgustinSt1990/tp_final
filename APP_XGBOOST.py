@@ -1,4 +1,4 @@
-print ('\n\nTP FINAL: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
+print ('TP FINAL: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
 import numpy as np
 import pandas as pd
 

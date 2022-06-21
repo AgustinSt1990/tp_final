@@ -10,7 +10,7 @@ from copy import copy
 import logging
 import datetime as dt
 formatter = '%(levelname)s:\n %(message)s | %(asctime)s\n| line %(lineno)d\n'
-logging.basicConfig(filename='logfile_xgboost.log', level=logging.INFO, force=True, filemode='w', **{'format':formatter})
+logging.basicConfig(filename='logfile_smartserie.log', level=logging.INFO, force=True, filemode='w', **{'format':formatter})
 logger = logging.getLogger()
 
 """ (1) >> FUNCIONES"""

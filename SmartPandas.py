@@ -1,3 +1,5 @@
+print ('Libreria SmartPandas:\n\tClases:\n\t\t- PandasTransform, PandasFeatureUnion')
+
 """Este es el archivo que contiene funciones y clases"""
 import numpy as np
 import pandas as pd
@@ -7,9 +9,10 @@ from scipy import sparse
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, StandardScaler, MaxAbsScaler
 
-"""Funcion que devuelve informacion de un DataFrame en formato tipo DataFrame"""
+
 
 def data_info(data, name='data'):
+    """Funcion que devuelve informacion de un DataFrame en formato tipo DataFrame"""
     df = pd.DataFrame(pd.Series(data.columns))
     df.columns = ['columna']
     df.columns.name = f'info de {name}'
@@ -23,6 +26,34 @@ def data_info(data, name='data'):
     df = df.sort_values(by=['dtype', 'count_unique'])
     df = df.reset_index(drop=True)
     return df
+
+
+labels = []
+def x_en(label):
+    """Funcion que permite crear archivos enumeradores, se utiliza especialmente dentro del logging y en los print's"""
+    global labels
+    if labels.count(label) == 0:
+        file = open('x_en_'+label+'.log', 'a')
+        file.close()
+        file = open('x_en_'+label+'.log', 'w')
+        file.write('1')
+        file.close()
+        labels.append(label)
+        return '1'
+    else:       
+        file = open('x_en_'+label+'.log', 'r')
+        i = file.read()
+        file.close()
+        i = int(i)
+        i += 1
+        i = str(i)
+        file = open('x_en_'+label+'.log', 'w')
+        file.write(i)
+        file.close()  
+        return i
+
+        
+
 
 ###########################################################################################
 '''              MODULO DE CLASES'''
@@ -261,6 +292,9 @@ class BuscarIndex():
 
 
 """FUNCION DE AUTO-ML PARA OBTENER UNA TUPLA DE DICCIONARIOS HABIENDO IMPLENTADO ENSABLE"""
+from sklearn.model_selection import KFold, cross_val_score, GridSearchCV, StratifiedKFold
+import sklearn.metrics as metrics
+from sklearn.ensemble import BaggingClassifier
 
 def evaluate_model(model_instance, X_train, y_train, X_test, y_test, gridSearch_params, gridSearch_bagging_params=False, random_state=np.random.randint(1000), n_split=3):
     

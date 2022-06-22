@@ -1,6 +1,9 @@
 AirPassengers.csv
 Supertienda.xls
 target_meat.csv
+customer_transaction_data.csv
+item_data.csv
+target_hp.csv
 *.log
 *.pickle
 data/*

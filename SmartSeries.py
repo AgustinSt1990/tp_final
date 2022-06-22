@@ -136,11 +136,11 @@ def apply_dark_mode(apply=True):
     plt.rc('figure', facecolor='#313233')
     plt.rc('axes', facecolor='#313233', edgecolor='none',
           axisbelow=True, grid=True, prop_cycle=colors,
-           labelcolor='0.75'
+           labelcolor='0.81'
           )
     plt.rc('grid', color='474A4A', linestyle='solid')
-    plt.rc('xtick', color='0.75')
-    plt.rc('ytick', direction='out', color='0.75')
+    plt.rc('xtick', color='0.81', labelsize=12)
+    plt.rc('ytick', direction='out', color='0.81', labelsize=12)
     plt.rc('legend', facecolor='#313233', edgecolor='#313233')
     plt.rc('text', color='#C9C9C9')
     return        

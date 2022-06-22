@@ -1,4 +1,4 @@
-print ('APP XGBOST: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
+print ('>> APP XGBOST: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
 import numpy as np
 import pandas as pd
 
@@ -6,9 +6,8 @@ from tqdm import tqdm
 
 import xgboost
 from sklearn.metrics import mean_squared_error
-print ('xgboost actual', xgboost.__version__)
-print ('9/6/2022\n\txgboost version: 1.5.0')
-print ('14/6/2022\n\txgboost version: 1.6.0')
+print ('xgboost version actual:', xgboost.__version__)
+print ('Version de diseño en 14/6/2022\n\txgboost version: 1.6.0')
 
 import pickle
 

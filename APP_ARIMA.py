@@ -1,5 +1,4 @@
-# APP ARIMA
-print ('APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
+print ('>> APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
 from os import times
 import numpy as np
 import pandas as pd

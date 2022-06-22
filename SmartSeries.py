@@ -1,4 +1,4 @@
-print ('Libreria SmartSeries: Clases: VectorBuilder() - Funciones: load_dataset')
+print ('Libreria SmartSeries:\n\tClases:\n\t\t- VectorBuilder() \n\tFunciones:\n\t\t- load_dataset')
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
@@ -15,16 +15,14 @@ logger = logging.getLogger()
 
 """ (1) >> FUNCIONES"""
 
-def load_dataset(file_name):
+def load_dataset(file_name, freq:str=None, dropnan=True):
     logger.info(f'LOADING FUNCTION: load_dataset(): se carga el dataset llamado {file_name}')
     df = pd.read_csv(file_name)
-    df['date'] = pd.to_datetime(df['date'])
-    logger.warning('El dataset debe tener una columna "date" con formato "yyyy-mm-dd"')
-    df.set_index('date', inplace=True)
-    df = df.asfreq('D')
-    logger.warning('Por default se considera la serie con freq = "D"')
-    print ('Cantidad de NaNs en ', df.isna().sum().to_string())
-    if df.isna().sum().sum() > 0: df.dropna(inplace=True); print ('NaNs eliminados\n')
+    df = check_type_dt(df)
+    if freq != None: df = df.asfreq(freq=freq)
+    if dropnan:
+        print ('Cantidad de NaNs en: \n' + df.isna().sum().to_string())
+        if df.isna().sum().sum() > 0: df.dropna(inplace=True); print ('NaNs eliminados\n')
     return df
 
 def check_type_dt(dataset): # for VectorBuilding.__init__
@@ -34,8 +32,10 @@ def check_type_dt(dataset): # for VectorBuilding.__init__
     else:
         cols_dt = (dataset.dtypes == '<M8[ns]').values
         if cols_dt.sum() == 0:
-            print ('\nERROR: No existen columnas tipo datetime\n')
-            return # RaiseError
+            indice = check_type_str(dataset)
+            print (f'\nSerie de tiempo: {indice}\n')
+            dataset[indice] = pd.to_datetime(dataset[indice], infer_datetime_format=True)
+            return dataset.set_index(indice)
         elif cols_dt.sum() == 1:
             indice = list(dataset.loc[:, cols_dt].columns)[0]
             print (f'\nSerie de tiempo: {indice}\n')
@@ -43,11 +43,24 @@ def check_type_dt(dataset): # for VectorBuilding.__init__
         else:
             indice = select_type_dt(dataset, cols_dt)
             print (f'\nSerie de tiempo: {indice}\n')
-            return dataset.set_index(indice)            
+            return dataset.set_index(indice)
 
-def select_type_dt(dataset, cols_dt): # used above
+def check_type_str(dataset): # for load_dataset
+    cols_mask = (dataset.dtypes == 'object').values
+    cols_obj = dataset.loc[:, cols_mask].columns.values
+    posibles_dt = []
+    if len(cols_obj) == 0: return print('No hay columnas tipo "object"')
+    for i, elemento in enumerate(cols_obj):
+        try:
+            pd.to_datetime(dataset[elemento], infer_datetime_format=True)
+            posibles_dt.append(elemento)
+        except:
+            pass
+    return select_type_dt(dataset, posibles_dt)
+
+def select_type_dt(dataset, cols_dt): # used above in check_type_str and check_type_dt
     indice = list(dataset.loc[:, cols_dt].columns)
-    #display (dataset.loc[:, cols_dt].head(4))
+    if len(indice) == 1: return indice[0]
     for i in range(len(indice)):
         indice[i] = str(i+1) + ') {}'.format(indice[i])
     print ('>> SELECCION DE SERIE DE TIEMPO:')

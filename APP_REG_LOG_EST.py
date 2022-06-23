@@ -23,37 +23,40 @@ def est_log_trend(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
     features = df_train.columns.drop([vector.target, model_target, 'timeIndex_sq'])
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
 
 def est_log_trend_sq(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
     features = df_train.columns.drop([vector.target, model_target, 'timeIndex'])
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
 
 def log_trend(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
     features = df_train.columns.filter('timeIndex')
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
 
 def log_trend_sq(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
     features = df_train.columns.filter('timeIndex_sq')
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
 
 def lin_trend(df_train, vector):#, features, target):
     model_target = vector.target
-    features = df_train.columns.filter('timeIndex')
+    features = ['timeIndex']
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
 
 def lin_trend_sq(df_train, vector):#, features, target):
     model_target = vector.target
-    features = df_train.columns.filter('timeIndex_sq')
+    features = ['timeIndex_sq']
     argumento = get_formula(model_target, features)
-    return smf.ols(formula=argumento, data = df_train).fit()
+    return smf.ols(formula=argumento, data = df_train)
+
+def available_models():
+    return [est_log_trend(), est_log_trend_sq(), log_trend(), log_trend_sq(), lin_trend(), lin_trend_sq()]
 
 if __name__ == '__main__':
     

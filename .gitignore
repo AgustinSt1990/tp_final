@@ -8,6 +8,7 @@ df_targets.csv
 *.pickle
 data/*
 test/*
+IMAGEN*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

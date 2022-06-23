@@ -29,6 +29,7 @@ def get_stationarity(timeseries, windows=12, visualize=False):
         rolling_std = timeseries.rolling(window=windows).std()
         
         # rolling statistics plot
+        plt.figure(figsize=(15,7))
         plt.plot(timeseries, color='blue', label='Original')
         plt.plot(rolling_mean, color='red', label='Rolling Mean')
         plt.plot(rolling_std, color='black', label='Rolling Std')
@@ -40,8 +41,9 @@ def get_stationarity(timeseries, windows=12, visualize=False):
     # test 2: Dickey–Fuller test:
     result = adfuller(timeseries)
     if visualize:
+        print ('\tDICK-FULLER TEST')
         print('ADF Statistic: {}'.format(result[0]))
-        print('p-value: {}'.format(result[1]))
+        print('p-value: {}'.format(result[1].round(4)))
         print('Critical Values:')
         for key, value in result[4].items():
             print('\t{}: {}'.format(key, value))
@@ -70,7 +72,7 @@ def test_stationarity(timeseries, windows=12):
     selected_method_id = pd.Series(lista_p_values).idxmin()
 
     # optimizar el método con nuevos parámetros
-    lista_movingAvg_values = [9, 12, 14, 15, 16, 17, 20, 50, 55]
+    lista_movingAvg_values = [2, 5, 9, 12, 14, 15, 16, 17, 20, 50, 55]
     lista_p_values_i = []
     if differentiation_methods_names[selected_method_id] == 'SMA':
         for i in lista_movingAvg_values:
@@ -89,10 +91,9 @@ def test_stationarity(timeseries, windows=12):
         optmized_params_id = 0
         result = df_log_3
     
-    print ('\DIFFERENTIATION  PROCESS')
+    print ('\tDIFFERENTIATION  PROCESS')
     print (f'Selected Method: {differentiation_methods_names[selected_method_id]}'\
-        f'\nOptimized Params: {lista_movingAvg_values[optmized_params_id]}\n'\
-            '\tDICK FULLER TEST')
+        f'\nOptimized Params: {lista_movingAvg_values[optmized_params_id]}\n')
     get_stationarity(result, windows=lista_movingAvg_values[optmized_params_id], visualize=True)
     return np.exp(result)
 

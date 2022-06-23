@@ -1,4 +1,5 @@
 print ('Libreria SmartSeries:\n\tClases:\n\t\t- VectorBuilder() \n\tFunciones:\n\t\t- load_dataset')
+from SmartPandas import x_en
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
@@ -9,20 +10,21 @@ from copy import copy
 
 import logging
 import datetime as dt
-formatter = '%(levelname)s:\n %(message)s | %(asctime)s\n| line %(lineno)d\n'
-logging.basicConfig(filename='logfile_smartserie.log', level=logging.INFO, force=True, filemode='w', **{'format':formatter})
-logger = logging.getLogger()
+
+
 
 """ (1) >> FUNCIONES"""
 
-def load_dataset(file_name, freq:str=None, dropnan=True):
-    logger.info(f'LOADING FUNCTION: load_dataset(): se carga el dataset llamado {file_name}')
+def load_dataset(file_name, freq:str=None, dropnan=False, fillnan=False):
     df = pd.read_csv(file_name)
     df = check_type_dt(df)
     if freq != None: df = df.asfreq(freq=freq)
     if dropnan:
         print ('Cantidad de NaNs en: \n' + df.isna().sum().to_string())
-        if df.isna().sum().sum() > 0: df.dropna(inplace=True); print ('NaNs eliminados\n')
+        if df.isna().sum().sum() > 0: df = df.dropna(); print ('NaNs eliminados\n')
+    if fillnan:
+        print ('Cantidad de NaNs en: \n' + df.isna().sum().to_string())
+        df.fillna(method='bfill', inplace=True); print ('NaNs imputados: método "backfill"')
     return df
 
 def check_type_dt(dataset): # for VectorBuilding.__init__
@@ -95,6 +97,7 @@ class VectorBuilder():
         self.target = None
         self.downsampling = None
         self.targets = []
+        self.features = []
         
     def create(self, target=None, func='sum'):
         if isinstance(target, type(None)):
@@ -111,7 +114,7 @@ class VectorBuilder():
         
         label = 'log_' + self.target
         self.vector.loc[:, label] = pd.Series(np.log(self.vector[self.target]), index=self.vector.index)
-        if label not in self.targets: self.targets.append(label)
+        #if label not in self.targets: self.targets.append(label)
         if not isinstance(self.downsampling, type(None)): self.downsampling.loc[:, label] = pd.Series(np.log(self.downsampling[self.target]), index=self.downsampling.index)
         
         label = 'timeIndex'
@@ -129,6 +132,10 @@ class VectorBuilder():
         
         return 'Vector actualizado'
 
+    def dummy(self, how='W'):
+        # change from freq to strftime
+        if how == 'W': self.vector = pd.concat([self.vector, pd.get_dummies(pd.Series([i.strftime('%U') for i in self.vector.index], index=self.vector.index), prefix='sem')], axis=1)
+        if how == 'M': self.vector = pd.concat([self.vector, sort_cols_by_month(pd.get_dummies(pd.Series([i.strftime('%b') for i in self.vector.index], index=self.vector.index)))], axis=1)
 
 ## FUNCTION AUXILIARES
 # 
@@ -180,3 +187,11 @@ class Results():
     def read_data(self, data):
         self.dataset = data.copy()
         return self.dataset
+
+
+if __name__ == '__main__':
+    formatter = '%(levelname)s:\n %(message)s | %(asctime)s\n| line %(lineno)d\n'
+    logging.basicConfig(filename='logfile_smartserie.log', level=logging.INFO, force=True, filemode='w', **{'format':formatter})
+    logger = logging.getLogger()
+    logger.info('{}) LOADING FUNCTION: load_dataset(): se carga el dataset'.format(x_en('log_SS')))
+    logger.warning('{}) Cuando "dropnan = True" se pierde la freq en el index'.format(x_en('log_SS')))

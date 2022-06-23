@@ -33,13 +33,13 @@ def est_log_trend_sq(df_train, vector):#, features, target):
 
 def log_trend(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
-    features = df_train.columns.filter('timeIndex')
+    features = ['timeIndex']
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
 def log_trend_sq(df_train, vector):#, features, target):
     model_target = 'log_'+ vector.target
-    features = df_train.columns.filter('timeIndex_sq')
+    features = ['timeIndex_sq']
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
@@ -56,7 +56,19 @@ def lin_trend_sq(df_train, vector):#, features, target):
     return smf.ols(formula=argumento, data = df_train)
 
 def available_models():
-    return [est_log_trend(), est_log_trend_sq(), log_trend(), log_trend_sq(), lin_trend(), lin_trend_sq()]
+    return [est_log_trend, est_log_trend_sq, log_trend, log_trend_sq, lin_trend, lin_trend_sq]
+
+def def_features(vector): #obsoleto
+    features_est_log_trend = vector.vector.columns.drop(['log_'+ vector.target, vector.target, 'timeIndex_sq'])
+    features_est_log_trend_sq = vector.vector.columns.drop(['log_'+ vector.target, vector.target, 'timeIndex_sq'])
+    features_log_trend = ['timeIndex']
+    features_log_trend_sq = ['timeIndex_sq']
+    features_lin_trend = ['timeIndex']
+    features_lin_trend_sq = ['timeIndex_sq']
+    return [features_est_log_trend, features_est_log_trend_sq, features_log_trend, features_log_trend_sq, features_lin_trend, features_lin_trend_sq]
+
+def def_models():
+    return ['log_trend_est', 'log_trend_est_sq', 'log_trend', 'log_trend_sq', 'lin_trend', 'lin_trend_sq']
 
 if __name__ == '__main__':
     

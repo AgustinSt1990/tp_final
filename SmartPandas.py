@@ -1,4 +1,4 @@
-print ('Libreria SmartPandas:\n\tClases:\n\t\t- PandasTransform, PandasFeatureUnion')
+#print ('Libreria SmartPandas:\n\tClases:\n\t\t- PandasTransform, PandasFeatureUnion')
 
 """Este es el archivo que contiene funciones y clases"""
 import numpy as np

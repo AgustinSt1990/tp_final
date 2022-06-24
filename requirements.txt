@@ -1,6 +1,6 @@
 numpy
 pandas
-statsmodels X
+statsmodels 0.13.2
 xgboost 1.6.0
 sklearn
 tqdm

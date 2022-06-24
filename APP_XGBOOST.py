@@ -1,4 +1,4 @@
-print ('>> APP XGBOST: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
+#print ('>> APP XGBOST: APLICACION XGBOOST PARA TIME SERIES FORECASTING\n')
 import numpy as np
 import pandas as pd
 
@@ -49,7 +49,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     return pd.DataFrame(agg.values, columns=['train', 'test'])
 
 
-def walk_forward_validation(data, n_test):
+def walk_forward_validation(data, n_test, visualization=False):
     """Validacion walk-forward para datos univariados"""
     logger.info('MODEL FUNCTION: walk_forward_validation(): funcion principal - queda almacenada en "app_xgboost_forecast.pickle"')
     data = series_to_supervised(data.values, n_in=1, n_out=1, dropnan=True)
@@ -71,12 +71,12 @@ def walk_forward_validation(data, n_test):
         # computar el progreso
         progress.append('>expected=%.1f, predicted=%.1f' % (testy, yhat))
     
-    print('\n'.join([i for i in progress]))
+    if visualization: print('\n'.join([i for i in progress]))
     # estimar el error por RMSE
     error = mean_squared_error(test.iloc[:, -1], predictions)
     df_test = test.iloc[:, 1].to_frame()
     df_test.columns = ['real']
-    return error.round(4), df_test, pd.DataFrame(pd.Series(predictions), columns=['predictions'])	
+    return error, df_test, pd.DataFrame(pd.Series(predictions), columns=['predictions'])	
 
 def train_test_split_st(data, n_test):
     """Divide un dataset univariado en train y test"""

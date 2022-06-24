@@ -1,4 +1,4 @@
-print ('Libreria SmartSeries:\n\tClases:\n\t\t- VectorBuilder() \n\tFunciones:\n\t\t- load_dataset')
+#print ('Libreria SmartSeries:\n\tClases:\n\t\t- VectorBuilder() \n\tFunciones:\n\t\t- load_dataset')
 from SmartPandas import x_en
 import numpy as np
 import pandas as pd

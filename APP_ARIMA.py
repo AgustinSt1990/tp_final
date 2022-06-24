@@ -1,5 +1,5 @@
 # ACTUALIZAR
-print ('>> APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
+#print ('>> APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
 from os import times
 import numpy as np
 import pandas as pd
@@ -25,19 +25,20 @@ def get_stationarity(timeseries, windows=12, visualize=False):
     logger.info('{}) FUNCTION: get_stationarity'.format(x_1()))
     
     if visualize:
-        # test: rolling statistics
-        rolling_mean = timeseries.rolling(window=windows).mean()
-        rolling_std = timeseries.rolling(window=windows).std()
-        
-        # rolling statistics plot
-        plt.figure(figsize=(15,7))
-        plt.plot(timeseries, color='blue', label='Original')
-        plt.plot(rolling_mean, color='red', label='Rolling Mean')
-        plt.plot(rolling_std, color='black', label='Rolling Std')
-        plt.legend(loc='best')
-        plt.title('Rolling Mean & Standard Deviation - window = {}'.format(windows))
-        logger.info('{}) En la función get_stationarity, la línea siguiente es plt.show() y tiene un parámetro "block" - True para visualizar en VSCode, False para cerrar graphs cuando termina ejecución.'.format(x_1()))
-        plt.show(block=False)
+        if windows != None:
+            # test: rolling statistics
+            rolling_mean = np.exp(timeseries.ewm(windows).mean())
+            rolling_std = np.exp(timeseries.ewm(windows).std())
+            
+            # rolling statistics plot
+            plt.figure(figsize=(20,7))
+            plt.plot(np.exp(timeseries), color='orange', label='Original')
+            plt.plot(rolling_mean, color='red', label='Rolling Mean')
+            plt.plot(rolling_std, color='black', label='Rolling Std')
+            plt.legend(loc='best')
+            plt.title('Rolling Mean & Standard Deviation - window = {}'.format(windows))
+            logger.info('{}) En la función get_stationarity, la línea siguiente es plt.show() y tiene un parámetro "block" - True para visualizar en VSCode, False para cerrar graphs cuando termina ejecución.'.format(x_1()))
+            plt.show(block=False)
     
     # test 2: Dickey–Fuller test:
     result = adfuller(timeseries)

@@ -1,0 +1,6 @@
+numpy
+pandas
+statsmodels X
+xgboost 1.6.0
+sklearn
+tqdm

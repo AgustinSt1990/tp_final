@@ -1,3 +1,4 @@
+# ACTUALIZAR
 print ('>> APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
 from os import times
 import numpy as np
@@ -43,7 +44,7 @@ def get_stationarity(timeseries, windows=12, visualize=False):
     if visualize:
         print ('\tDICK-FULLER TEST')
         print('ADF Statistic: {}'.format(result[0]))
-        print('p-value: {}'.format(result[1].round(4)))
+        print('p-value: {}'.format(result[1]))
         print('Critical Values:')
         for key, value in result[4].items():
             print('\t{}: {}'.format(key, value))

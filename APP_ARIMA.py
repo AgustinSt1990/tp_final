@@ -51,7 +51,7 @@ def get_stationarity(timeseries, windows=12, visualize=False):
             print('\t{}: {}'.format(key, value))
     return result[1]
 
-def test_stationarity(timeseries, windows=12):
+def test_stationarity(timeseries, windows=12, visualize=True):
     logger.info('{}) FUNCTION: test_stationarity'.format(x_1()))
     
     if isinstance(timeseries, type(pd.DataFrame())):
@@ -96,7 +96,7 @@ def test_stationarity(timeseries, windows=12):
     print ('\tDIFFERENTIATION  PROCESS')
     print (f'Selected Method: {differentiation_methods_names[selected_method_id]}'\
         f'\nOptimized Params: {lista_movingAvg_values[optmized_params_id]}\n')
-    get_stationarity(result, windows=lista_movingAvg_values[optmized_params_id], visualize=True)
+    get_stationarity(result, windows=lista_movingAvg_values[optmized_params_id], visualize=visualize)
     return np.exp(result)
 
 

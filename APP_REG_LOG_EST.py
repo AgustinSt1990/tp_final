@@ -19,38 +19,57 @@ def get_formula(target, lista_features):
     string_features = ' + '.join(lista_features)
     return target + ' ~ ' + string_features
 
-def est_log_trend(df_train, vector, EMA=False, EMA_arg=None):
+def est_log_trend(df_train, vector, umbral=None, EMA=False, EMA_arg=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)
+    
     model_target = 'log_'+ vector.target
     features = df_train.columns.drop([vector.target, model_target, 'timeIndex_sq'])
     if EMA: features += EMA_arg
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
-def est_log_trend_sq(df_train, vector):
+def est_log_trend_sq(df_train, vector, umbral=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)
     model_target = 'log_'+ vector.target
     features = df_train.columns.drop([vector.target, model_target])# aca eliminast timeIndex
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
-def log_trend(df_train, vector):
+def log_trend(df_train, vector, umbral=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)    
     model_target = 'log_'+ vector.target
     features = ['timeIndex']
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
-def log_trend_sq(df_train, vector):
+def log_trend_sq(df_train, vector, umbral=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)    
     model_target = 'log_'+ vector.target
     features = ['timeIndex', 'timeIndex_sq']
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
-def lin_trend(df_train, vector):
+def lin_trend(df_train, vector, umbral=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)    
     model_target = vector.target
     features = ['timeIndex']
     argumento = get_formula(model_target, features)
     return smf.ols(formula=argumento, data = df_train)
 
-def lin_trend_sq(df_train, vector):
+def lin_trend_sq(df_train, vector, umbral=None):
+    if umbral != None:
+        mask = pd.Series(vector.targets).isin([umbral]).values
+        vector.change_target(vector, umbral)    
     model_target = vector.target
     features = ['timeIndex_sq']
     argumento = get_formula(model_target, features)

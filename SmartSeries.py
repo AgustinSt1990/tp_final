@@ -98,7 +98,11 @@ class VectorBuilder():
         self.downsampling = None
         self.targets = []
         self.features = []
-        
+
+    @staticmethod
+    def change_target(self, umbral):
+        self.target = umbral
+
     def create(self, target=None, func='sum'):
         if isinstance(target, type(None)):
             self.target = list(self.dataset.columns)[0]

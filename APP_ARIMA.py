@@ -1,5 +1,7 @@
 # ACTUALIZAR
 #print ('>> APP ARIMA: Recibe una serie, y aplica logaritmo, 3 procesos de diferenciacion y un proceso de optimización, luego grafica para visualizar resultados y seleccionar parámetros ARIMA')
+
+
 from os import times
 import numpy as np
 import pandas as pd
@@ -43,7 +45,7 @@ def get_stationarity(timeseries, windows=12, visualize=False):
     # test 2: Dickey–Fuller test:
     result = adfuller(timeseries)
     if visualize:
-        print ('\tDICK-FULLER TEST')
+        print ('\tDICKEY-FULLER TEST')
         print('ADF Statistic: {}'.format(result[0]))
         print('p-value: {}'.format(result[1]))
         print('Critical Values:')
@@ -103,7 +105,7 @@ def test_stationarity(timeseries, windows=12, visualize=True):
 # GridSearch ARIMA: https://machinelearningmastery.com/grid-search-arima-hyperparameters-with-python/
 
 # Manual setings of params ARIMA
-def params_set_plot(y, lags=None, figsize=(12, 7), style='bmh'):
+def params_set_plot(y, lags=None, figsize=(12, 7), style='bmh', dpi=100):
     """ 
         Plotea la serie de tiempo, el ACF y PACF y el test de Dickey–Fuller
         
@@ -118,7 +120,7 @@ def params_set_plot(y, lags=None, figsize=(12, 7), style='bmh'):
             y = y[y.columns.values[0]]
         
     with plt.style.context(style):    
-        fig = plt.figure(figsize=figsize)
+        fig = plt.figure(figsize=figsize, dpi=dpi)
         layout = (2, 2)
         
         # definimos ejes
@@ -126,7 +128,7 @@ def params_set_plot(y, lags=None, figsize=(12, 7), style='bmh'):
         acf_ax = plt.subplot2grid(layout, (1, 0))
         pacf_ax = plt.subplot2grid(layout, (1, 1))
         
-        y.plot(ax=ts_ax)
+        y.plot(color='orange', ax=ts_ax)
         
         # obtengo el p-value con h0: raiz unitaria presente
         p_value = sm.tsa.stattools.adfuller(y)[1]

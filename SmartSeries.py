@@ -17,6 +17,7 @@ import datetime as dt
 
 def load_dataset(file_name, freq:str=None, dropnan=False, fillnan=False):
     df = pd.read_csv(file_name)
+    df = check_underscore(df)
     df = check_type_dt(df)
     if freq != None: df = df.asfreq(freq=freq)
     if dropnan:
@@ -25,6 +26,13 @@ def load_dataset(file_name, freq:str=None, dropnan=False, fillnan=False):
     if fillnan:
         print ('Cantidad de NaNs en: \n' + df.isna().sum().to_string())
         df.fillna(method='bfill', inplace=True); print ('NaNs imputados: método "backfill"')
+    return df
+
+def check_underscore(df):
+    cols = list(df.columns)
+    for i, elemento in enumerate(cols):
+        cols[i] = cols[i].replace(' ', '_')
+    df.columns = cols
     return df
 
 def check_type_dt(dataset): # for VectorBuilding.__init__

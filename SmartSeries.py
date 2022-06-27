@@ -11,7 +11,7 @@ from copy import copy
 import logging
 import datetime as dt
 
-
+import pickle
 
 """ (1) >> FUNCIONES"""
 
@@ -94,6 +94,11 @@ def sort_cols_by_month(data): # used in VectorBuilder.treatment() #WARNING
         label_list.insert(i, dates[i])
         data = data.reindex(label_list, axis=1)
     return data   
+
+def save_object(objeto, file_name):
+    """Guarda el objeto en un archivo pickle"""
+    with open(file_name+'.pickle', 'wb') as f:
+        pickle.dump(objeto, f)    
 
 """ (2) >> CLASE: VectorBuilder: viene de Aplicacion_2_Regresion_log_est"""
 

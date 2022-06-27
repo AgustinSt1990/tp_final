@@ -53,7 +53,7 @@ def get_stationarity(timeseries, windows=12, visualize=False):
             print('\t{}: {}'.format(key, value))
     return result[1]
 
-def test_stationarity(timeseries, windows=12, visualize=True):
+def test_stationarity(timeseries, windows=12, visualize=True, get=False):
     logger.info('{}) FUNCTION: test_stationarity'.format(x_1()))
     
     if isinstance(timeseries, type(pd.DataFrame())):
@@ -76,7 +76,7 @@ def test_stationarity(timeseries, windows=12, visualize=True):
     selected_method_id = pd.Series(lista_p_values).idxmin()
 
     # optimizar el método con nuevos parámetros
-    lista_movingAvg_values = [2, 5, 9, 12, 14, 15, 16, 17, 20, 50, 55]
+    lista_movingAvg_values = [3, 5, 9, 12, 14, 15, 16, 17, 20, 50, 55]
     lista_p_values_i = []
     if differentiation_methods_names[selected_method_id] == 'SMA':
         for i in lista_movingAvg_values:
@@ -98,8 +98,9 @@ def test_stationarity(timeseries, windows=12, visualize=True):
     print ('\tDIFFERENTIATION  PROCESS')
     print (f'Selected Method: {differentiation_methods_names[selected_method_id]}'\
         f'\nOptimized Params: {lista_movingAvg_values[optmized_params_id]}\n')
-    get_stationarity(result, windows=lista_movingAvg_values[optmized_params_id], visualize=visualize)
-    return np.exp(result)
+    if lista_movingAvg_values[optmized_params_id] != None: get_stationarity(result, windows=lista_movingAvg_values[optmized_params_id], visualize=visualize)
+    if not get: return result
+    elif get: return {differentiation_methods_names[selected_method_id]: lista_movingAvg_values[optmized_params_id]}
 
 
 # GridSearch ARIMA: https://machinelearningmastery.com/grid-search-arima-hyperparameters-with-python/

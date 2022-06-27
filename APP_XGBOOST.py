@@ -76,7 +76,8 @@ def walk_forward_validation(data, n_test, visualization=False):
     error = mean_squared_error(test.iloc[:, -1], predictions)
     df_test = test.iloc[:, 1].to_frame()
     df_test.columns = ['real']
-    return error, df_test, pd.DataFrame(pd.Series(predictions), columns=['predictions'])	
+    return error, df_test, pd.DataFrame(pd.Series(predictions), columns=['predictions'])
+
 
 def train_test_split_st(data, n_test):
     """Divide un dataset univariado en train y test"""

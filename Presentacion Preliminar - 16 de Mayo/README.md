@@ -89,9 +89,9 @@ El comercio es un campo inherente a la vida cotidiana. Ya sea desde el lado acti
 
 Para encarar ese desafío proyectamos hacer uso de librerias de Python con statmodels para aplicar las 2 clases de tratamiento para las series de tiempo:
 
-- Time series analysis: análisis de series de tiempo
+# - Time series analysis: análisis de series de tiempo
 
-- Time series forecasting: Pronóstico de series de tiempo
+# - Time series forecasting: Pronóstico de series de tiempo
 
 
 ## <font color = #0024af>3. <u>Aporte esperado</u></font>

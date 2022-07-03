@@ -25,11 +25,11 @@ Agustín Federico Stigliano y compañia, entregado para Digital House.
     - <b>SmartPandas.py</b>: La nueva versión contiene funciones que se utilizan para generar instancias numeradas, que luego se añaden dentro de los mensaje de la libreria logging.
     - <b>SmartSeries.py</b>: Contiene funciones para cargar dataset (análogo a pd.read_csv) especial para series de tiempo, contiene clases para el tratamiento de los datasets.
     
-- <b>Datos</b>:
+- Datos:
     - customer_transaction_data.csv: se utiliza en la notebook de Data Science
     - item_data.csv: se utiliza en la notebook de Data Science
     
-- <b>Auxiliares</b>:
+- Auxiliares:
     - requierements.txt: son las librerias utilizadas y las versiones de diseño
 
 <br>

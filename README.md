@@ -8,8 +8,6 @@
     - Agustin Stigliano - Code Development Manager
     - Fernando Dupont - Presentation Development Manager
     
-Acceso al repositorio: https://github.com/AgustinSt1990/tp_final    
-
 ## <font color = #0024af>1. <u>Tema de investigación</u></font>
 
 Se trata de datos relevados de una empresa con información relacionada al área comercial.

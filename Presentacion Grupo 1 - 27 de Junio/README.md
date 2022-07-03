@@ -12,7 +12,7 @@ Agustín Federico Stigliano y compañia, entregado para Digital House.
 
 <b>Presentación Audiencia:</b>
 
-- <b>Presentacion_TP_FINAL_Grupo_1.pdf</b>: Filminas realizadas para la presentación la penúltima clase.
+- <b>Presentacion_TP_FINAL_Grupo_1.pdf</b>: Filminas realizadas para la presentación al CEO de la empresa.
     
 ## <font color = #0024af>2. <u>Documentos Backend</u></font>
 

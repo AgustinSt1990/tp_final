@@ -8,8 +8,6 @@
     - Agustin Stigliano - Code Development Manager
     - Fernando Dupont - Presentation Development Manager
     
-Acceso al repositorio: https://github.com/AgustinSt1990/tp_final    
-
 ## <font color = #0024af>1. <u>Tema de investigación</u></font>
 
 Se trata de datos relevados de una empresa con información relacionada al área comercial.
@@ -91,9 +89,9 @@ El comercio es un campo inherente a la vida cotidiana. Ya sea desde el lado acti
 
 Para encarar ese desafío proyectamos hacer uso de librerias de Python con statmodels para aplicar las 2 clases de tratamiento para las series de tiempo:
 
-- Time series analysis: análisis de series de tiempo
+# - Time series analysis: análisis de series de tiempo
 
-- Time series forecasting: Pronóstico de series de tiempo
+# - Time series forecasting: Pronóstico de series de tiempo
 
 
 ## <font color = #0024af>3. <u>Aporte esperado</u></font>
